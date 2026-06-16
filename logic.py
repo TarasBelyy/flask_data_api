@@ -6,6 +6,7 @@ from .db_connection import get_engine
 
 
 def add_data(file):
+    """Функция сохраняет исходные данные и статистику в базу данных."""
     df = pd.read_csv(file.stream)
     df.to_sql(
         name='data_set',
@@ -40,6 +41,7 @@ def add_data(file):
 
 
 def get_stats():
+    """Функция возвращает статистику по загруженному датасету."""
     sql_means = 'SELECT * FROM data_means'
     df_means = pd.read_sql_query(sql_means, con=get_engine())
     sql_medians = 'SELECT * FROM data_medians'
@@ -57,3 +59,12 @@ def get_stats():
         'correlations_coefficients': correlations
     }
     return json.dumps(ans)
+
+
+def get_cleaned_data():
+    """Функция возвращает данные, очищенные от дубликатов."""
+    sql = 'SELECT * FROM data_set'
+    df = pd.read_sql_query(sql, con=get_engine())
+    df = df.drop_duplicates()
+    csv_data = df.to_csv(index=False)
+    return csv_data

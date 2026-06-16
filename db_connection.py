@@ -8,6 +8,7 @@ DB_NAME = 'data_collection'
 
 
 def get_engine():
+    """Функция возвращает объект для подключения к базе данных."""
     conn_string = f'postgresql://{USER}:{PASSWORD}@{HOST}:{PORT}/{DB_NAME}'
     engine = create_engine(conn_string)
     return engine
