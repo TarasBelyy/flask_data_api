@@ -10,21 +10,16 @@ app = Flask(__name__)
 def upload_data():
     file = request.files.get('file')
     logic.add_data(file)
-    return '<p>Hello, World!</p>'
+    return '<p>Succesfully added new data</p>'
 
 
-@app.route('/data/stats/<int:data_id>/')
-def show_stats(data_id):
-    stats = logic.get_stats(data_id)
-    return '<p>Hello, World!</p>'
+@app.route('/data/stats/')
+def show_stats():
+    stats = logic.get_stats()
+    return stats
 
 
-@app.route('/data/list/')
-def show_list():
-    return '<p>Hello, World!</p>'
-
-
-@app.route('/data/clean/<int:data_id>/')
-def clean_data(data_id):
-    cleaned_data = logic.get_cleaned_data(data_id)
+@app.route('/data/clean/')
+def show_cleaned_data():
+    cleaned_data = logic.get_cleaned_data()
     return '<p>Hello, World!</p>'
