@@ -21,6 +21,7 @@ def add_data(file):
         if_exists='replace',
         index=False
     )
+
     median_values = df.median(numeric_only=True).to_frame().T
     median_values.to_sql(
         name='data_medians',
@@ -28,6 +29,7 @@ def add_data(file):
         if_exists='replace',
         index=False
     )
+
     corr_matrix = df.corr(numeric_only=True)
     corr_matrix.to_sql(
         name='data_correlations',
@@ -46,14 +48,12 @@ def get_stats():
     df_correlations = pd.read_sql_query(sql_corr, con=get_engine())
     means = df_means.to_dict(orient='records')[0]
     medians = df_medians.to_dict(orient='records')[0]
-    parameters = df_correlations.columns.to_list()
-    correlation_matrix = df_correlations.to_numpy().tolist()
-    correlations = df_correlations.to_dict(orient='records')
-    correlations2 = {'variables': parameters, 'correlation_matrix': correlation_matrix}
-    
+    variables = df_correlations.columns.to_list()
+    corr_matrix = df_correlations.to_numpy().tolist()
+    correlations = {'variables': variables, 'correlation_matrix': corr_matrix}
     ans = {
         'mean_values': means,
         'median_values': medians,
-        'correlations_coefficients': correlations2
+        'correlations_coefficients': correlations
     }
     return json.dumps(ans)
