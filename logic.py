@@ -6,7 +6,7 @@ from .db_connection import get_engine
 
 
 def add_data(file):
-    """Функция сохраняет исходные данные и статистику в базу данных."""
+    """Функция сохраняет исходный датасет и статистику в базу данных."""
     df = pd.read_csv(file.stream)
     df.to_sql(
         name='data_set',
@@ -62,7 +62,7 @@ def get_stats():
 
 
 def get_cleaned_data():
-    """Функция возвращает данные, очищенные от дубликатов."""
+    """Функция возвращает датасет, очищенный от дубликатов."""
     sql = 'SELECT * FROM data_set'
     df = pd.read_sql_query(sql, con=get_engine())
     df = df.drop_duplicates()

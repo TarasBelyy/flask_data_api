@@ -6,7 +6,7 @@ from . import logic
 app = Flask(__name__)
 
 
-@app.route('/upload/', methods=['POST'])
+@app.route('/upload', methods=['POST'])
 def upload_data():
     """Функция для обработки POST запросов по добавлению данных."""
     if 'file' not in request.files:
@@ -21,7 +21,7 @@ def upload_data():
     return jsonify({'response': 'data successfully uploaded'}), 201
 
 
-@app.route('/data/stats/')
+@app.route('/data/stats')
 def show_stats():
     """Функция для обратоки GET запросов для получения статистики."""
     try:
@@ -31,7 +31,7 @@ def show_stats():
     return stats, 200
 
 
-@app.route('/data/clean/')
+@app.route('/data/clean')
 def show_cleaned_data():
     """Функция для обработки GET запросов для получения очищенных данных."""
     try:
