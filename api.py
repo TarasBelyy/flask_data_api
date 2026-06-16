@@ -39,3 +39,9 @@ def show_cleaned_data():
     except Exception:
         return 'Server error', 500
     return cleaned_data, 200
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    """Функция для обработки ошибки 404."""
+    return 'Page not found', 404
