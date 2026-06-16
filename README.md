@@ -48,4 +48,5 @@ curl http://127.0.0.1:5000/data/clean
 - pandas версии 3.0.3
 - SQLAlchemy версии 2.0.51
 - psycopg2-binary версии 2.9.12
+
 Для хранения данных используется PostgreSQL.

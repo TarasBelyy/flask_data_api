@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 
-from . import logic
+from src import logic
 
 
 app = Flask(__name__)
